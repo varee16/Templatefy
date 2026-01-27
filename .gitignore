@@ -1,0 +1,5 @@
+node_modules
+.env
+downloads
+data/orders.json
+data/tokens.json
