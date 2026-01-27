@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+    <head>
+        <meta charset="UTF-8">
+        <title>Admin Orders</title>
+        <style>
+            body {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px;}
+            table {border-collapse: collapse; width: 100%;}
+            th, td {border: 1px solid #ddd; padding: 8px;}
+            th {background: #f4f4f4;}
+            .expired {color: red; font-weight: bold;}
+        </style>
+    </head>
+    <body>
+        
+        <h1>📦 Order List</h1>
+
+        <table id="orders">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Email</th>
+                    <th>License</th>
+                    <th>Downloads</th>
+                    <th>Expire</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <script>
+            const params = new URLSearchParams(window.location.search)
+            const key = params.get("key")
+
+            fetch(`/api/orders?key=${key}`)
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.querySelector("#orders tbody")
+                const now = Date.now()
+
+                data.forEach(o => {
+                    const expired = now > o.expireAt
+                    const tr = document.createElement("tr")
+
+                    tr.innerHTML = `
+                    <td>${o.orderId}</td>
+                    <td>${o.email}</td>
+                    <td>${o.license}</td>
+                    <td>${o.downloadCount}/${o.downloadLimit}</td>
+                    <td>${new Date(o.expireAt).toLocaleString()}</td>
+                    <td class="${expired ? "expired" : ""}">
+                        ${expired ? "Expired" : "Active"}
+                    </td>
+                    `
+                    tbody.appendChild(tr)
+                })
+            })
+        </script>
+    </body>
+</html>
