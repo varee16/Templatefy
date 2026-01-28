@@ -5,11 +5,11 @@ const { error } = require("console");
 
 const app = express();
 
-app.use(express.json())
+// app.use(express.json())
 
-app.use(require("./webhook"));
-app.use(require("./verifyDownload"));
-app.use(require("./admin"));
+// app.use(require("./webhook"));
+// app.use(require("./verifyDownload"));
+// app.use(require("./admin"));
 
 
 app.get("/",(req,res) => {
@@ -17,13 +17,13 @@ app.get("/",(req,res) => {
 });
 
 //==== Admin Page =====
-// app.get("/admin", ( req, res) => {
-//     if(req.query.key !== process.env.ADMIN_SECRET) {
-//         return res.status(401).send("Unauthorized")
-//     }
+app.get("/admin", ( req, res) => {
+    if(req.query.key !== process.env.ADMIN_SECRET) {
+        return res.status(401).send("Unauthorized")
+    }
 
-//     res.sendFile(path.join(__dirname, "admin.html"))
-// })
+    res.sendFile(path.join(__dirname, "admin.html"))
+})
 
 //==== API: List Orders ===
 app.get("/api/orders", ( req, res) => {
