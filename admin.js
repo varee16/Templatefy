@@ -2,7 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const router = express.Router();
 
-router.get("/admin", (req, res) => {
+router.get("/", (req, res) => {
     if (req.query.key !== process.env.ADMIN_SECRET)
         return res.send("Unauthorized");
 

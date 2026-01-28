@@ -1,0 +1,14 @@
+PERSONAL LICENSE
+
+You are allowed to:
+- Use this template for personal projects
+- Use it for your own business or website
+- Modify the code for your own use
+- Use it for unlimited time
+
+You are NOT allowed to:
+- Resell, redistribute, or share the template files
+- Use the template to create products for sale
+- Upload the source files to public platforms
+
+This license is valid for one user only.
