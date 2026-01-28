@@ -5,9 +5,13 @@ const { error } = require("console");
 
 const app = express();
 
-// app.use(express.json())
 
-// app.use(require("./webhook"));
+app.use("/webhook",require("./webhook"));
+
+app.use(express.json())
+app.use(require("./checkout"))
+
+
 // app.use(require("./verifyDownload"));
 app.use("/api/orders", require("./admin"));
 app.use(express.static(path.join(__dirname,"public")))

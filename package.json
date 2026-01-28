@@ -12,6 +12,7 @@
   "type": "commonjs",
   "dependencies": {
     "archiver": "^7.0.1",
+    "body-parser": "^2.2.2",
     "dayjs": "^1.11.19",
     "express": "^5.2.1",
     "nodemailer": "^7.0.12",
