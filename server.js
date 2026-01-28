@@ -31,7 +31,7 @@ app.get("/api/orders", ( req, res) => {
         return res.status(401).json({error: "Unauthorized"})
     }
 
-    const ordersPath = path.join(__dirname,"data","orders.json")
+    const ordersPath = path.join(__dirname,"../data/orders.json")
     const orders = JSON.parse(fs.readFileSync(ordersPath, "utf-8"))
 
     res.json(orders)
