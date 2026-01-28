@@ -9,7 +9,7 @@ const app = express();
 
 // app.use(require("./webhook"));
 // app.use(require("./verifyDownload"));
-// app.use(require("./admin"));
+    app.use("/api/orders", require("./admin"));
 
 
 app.get("/",(req,res) => {
