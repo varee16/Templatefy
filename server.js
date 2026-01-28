@@ -9,11 +9,13 @@ const app = express();
 
 // app.use(require("./webhook"));
 // app.use(require("./verifyDownload"));
-    app.use("/api/orders", require("./admin"));
+app.use("/api/orders", require("./admin"));
+app.use(express.static(path.join(__dirname,"public")))
 
 
 app.get("/",(req,res) => {
-    res.send("Templatefy system is running 🚀");
+    // res.send("Templatefy system is running 🚀");
+    res.sendFile(path.join(__dirname, "public", "index.htnl"))
 });
 
 //==== Admin Page =====
