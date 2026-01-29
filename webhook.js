@@ -41,7 +41,7 @@ router.post("/webhook",
 
         generateZip(orderId, license, email);
 
-        const ordersPath = path.join(__dirname,"data","orders.json")
+        const ordersPath = path.join(process.cwd(),"data","orders.json")
         const orders = fs.existsSync(ordersPath)
         ? JSON.parse(fs.readFileSync(ordersPath))
         : [];
