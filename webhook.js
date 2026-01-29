@@ -31,8 +31,8 @@ router.post("/webhook",
     //จ่ายเงินสำเร็จ
     if (event.type === "checkout.session.completed") {
         const session = event.data.object;
-        const license = session.metadata.license;
-        const email = session.customer_email;
+        const license = session.metadata?.license || "personal";
+        const email = session.customer_email || session.customer_details?.email;
 
         const orderId = `ORD-${dayjs().format("YYYYMMDD")}-${Math.floor(Math.random() * 9000)}`;
 
@@ -41,7 +41,7 @@ router.post("/webhook",
 
         generateZip(orderId, license, email);
 
-        const ordersPath = path.join(__dirname,"data","orders-json")
+        const ordersPath = path.join(__dirname,"data","orders.json")
         const orders = fs.existsSync(ordersPath)
         ? JSON.parse(fs.readFileSync(ordersPath))
         : []
@@ -50,9 +50,9 @@ router.post("/webhook",
         const expireAt = now + Number(process.env.DOWNLOAD_EXPIRE_HOURS) * 60 * 60 * 1000
 
         orders.push({
-            orderId: "ORD-" + now,
-            email: session.customer_details.email,
-            license: "personal",
+            orderId,
+            email,
+            license,
             downloadCount: 0,
             downloadLimit: 2,
             expireAt
