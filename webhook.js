@@ -14,6 +14,9 @@ const router = express.Router();
 router.post("/webhook",
     express.raw({ type: "application/json"}),
     (req, res) => {
+
+        console.log("🔔 WEBHOOK HIT");
+
         const sig = req.headers["stripe-signature"]
 
         let event
@@ -30,6 +33,9 @@ router.post("/webhook",
 
     //จ่ายเงินสำเร็จ
     if (event.type === "checkout.session.completed") {
+
+        console.log("✅ CHECKOUT COMPLETED");
+        
         const session = event.data.object;
         const license = session.metadata?.license || "personal";
         const email = session.customer_email || session.customer_details?.email;
