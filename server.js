@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname,"public")))
 
 app.get("/",(req,res) => {
     // res.send("Templatefy system is running 🚀");
-    res.sendFile(path.join(__dirname, "public", "index.htnl"))
+    res.sendFile(path.join(__dirname, "public", "index.html"))
 });
 
 //==== Admin Page =====
@@ -32,16 +32,16 @@ app.get("/admin", ( req, res) => {
 })
 
 //==== API: List Orders ===
-app.get("/api/orders", ( req, res) => {
-    if(req.query.key !== process.env.ADMIN_SECRET) {
-        return res.status(401).json({error: "Unauthorized"})
-    }
+// app.get("/api/orders", ( req, res) => {
+//     if(req.query.key !== process.env.ADMIN_SECRET) {
+//         return res.status(401).json({error: "Unauthorized"})
+//     }
 
-    const ordersPath = path.join(__dirname,"../data/orders.json")
-    const orders = JSON.parse(fs.readFileSync(ordersPath, "utf-8"))
+//     const ordersPath = path.join(__dirname,"data","orders.json")
+//     const orders = JSON.parse(fs.readFileSync(ordersPath, "utf-8"))
 
-    res.json(orders)
-}) 
+//     res.json(orders)
+// }) 
  
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>

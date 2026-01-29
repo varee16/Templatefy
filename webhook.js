@@ -44,7 +44,7 @@ router.post("/webhook",
         const ordersPath = path.join(__dirname,"data","orders.json")
         const orders = fs.existsSync(ordersPath)
         ? JSON.parse(fs.readFileSync(ordersPath))
-        : []
+        : [];
 
         const now = Date.now()
         const expireAt = now + Number(process.env.DOWNLOAD_EXPIRE_HOURS) * 60 * 60 * 1000
